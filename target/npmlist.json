@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"test","dependencies":{"@influxdata/influxdb-client":{"version":"1.33.2"},"axios":{"version":"1.2.2"},"crypto-js":{"version":"4.1.1"},"http":{"version":"0.0.1-security"},"qs":{"version":"6.11.0"},"socket.io":{"version":"4.5.4"}}}
