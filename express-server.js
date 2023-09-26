@@ -22,12 +22,15 @@ const expressApp = express();
 //   methods: ["GET","POST"],
 //   optionsSuccessStatus: 200
 // }));
-app.options('*', cors())
+expressApp.options('*', cors())
 // 定义路由
 expressApp.get('/route', (req, res) => {
   // const win = global.mainWindow
   const newPath = req.query.route
   res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,POST')
+  res.header('Access-Control-Allow-Headers', '*')
+  res.header('Access-Control-Allow-Credentials', 'true')
   if (newPath && WHITE_LIST.includes(newPath)) {
     // win.loadURL(newPath)
     res.json({
