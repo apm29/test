@@ -15,23 +15,19 @@ const WHITE_LIST = [
 const express = require('express');
 const cors = require('cors');
 // 创建Express应用程序
-const expressApp = express();
-// 启用CORS中间件
-// expressApp.use(cors({
-//   origin: ["http://iot-test.ciih.net"],
-//   methods: ["GET","POST"],
-//   optionsSuccessStatus: 200
-// }));
-expressApp.options('*', cors())
+const app = express();
+app.use(cors());
+// 使用express.static中间件，并传入一个目录路径和一个虚拟路径前缀
+app.use('/test', express.static('test'));
 // 定义路由
-expressApp.get('/route', (req, res) => {
+app.get('/route', (req, res) => {
   // const win = global.mainWindow
   const newPath = req.query.route
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET,POST')
   res.header('Access-Control-Allow-Headers', '*')
   res.header('Access-Control-Allow-Credentials', 'true')
-  if (newPath && WHITE_LIST.includes(newPath)) {
+  if (newPath) {
     // win.loadURL(newPath)
     res.json({
       code: 200,
@@ -45,22 +41,11 @@ expressApp.get('/route', (req, res) => {
   }
 });
 
-// 启动Express服务器
-// const { dialog } = require('electron');
 
 
 
-
-const server = expressApp.listen(4000, '0.0.0.0', () => {
+const server = app.listen(4000, '0.0.0.0', () => {
   const port = server.address().port;
   console.log(`服务器已启动，监听端口 ${port}`);
-  // app.whenReady().then(() => {
-  //   dialog.showMessageBox({
-  //     type: 'info',
-  //     title: '提示',
-  //     message: `服务器已启动，监听端口 ${port}`,
-  //     buttons: ['确定']
-  //   });
-  // });
   
 });
